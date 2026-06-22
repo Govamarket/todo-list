@@ -2,6 +2,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
 }
 #box h1{
     display: flex;
@@ -13,7 +15,6 @@
     width: 100%;
     max-width: 500px;
     margin: 0 auto;
-    margin-top: 10px;
     height: 0 auto;
     background-color: #0e0000;
     border: 1px solid #272323;
