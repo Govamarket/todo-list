@@ -19,12 +19,18 @@ addBtn.addEventListener("click", (e) => {
   editBtn.type = "button";
   editBtn.textContent = "Edit";
   editBtn.style.padding = "8px 12px";
+  editBtn.style.backgroundColor = "red";
+  editBtn.style.color = "#fff";
   editBtn.style.minWidth = "70px";
+  editBtn.style.border = "none";
 
   const deleteBtn = document.createElement("button");
   deleteBtn.type = "button";
   deleteBtn.textContent = "Delete";
   deleteBtn.style.padding = "8px 12px";
+  deleteBtn.style.backgroundColor = "blue";
+  deleteBtn.style.color = "#fff";
+  deleteBtn.style.border = "none";
   deleteBtn.style.minWidth = "70px";
 
   const li = document.createElement("li");
@@ -33,6 +39,7 @@ addBtn.addEventListener("click", (e) => {
   li.style.justifyContent = "space-between";
   li.style.gap = "0.5rem";
   li.style.padding = "0.5rem 0";
+  li.style.color = "#fff";
 
   li.appendChild(itemText);
   li.appendChild(editBtn);
