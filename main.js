@@ -1,14 +1,15 @@
 const inputValue = document.querySelector("#item");
 const itemAdd = document.querySelector("#items");
 const addBtn = document.querySelector("#btn");
+const STORAGE_KEY = "todoItems";
 
-addBtn.addEventListener("click", (e) => {
-  e.preventDefault();
+let todos = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 
-  const text = inputValue.value.trim();
+const saveTodos = () => {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+};
 
-  if (!text) return;
-
+const createTodoElement = (text, index) => {
   const itemText = document.createElement("span");
   itemText.textContent = text;
   itemText.style.flex = "1";
@@ -41,19 +42,43 @@ addBtn.addEventListener("click", (e) => {
   li.style.padding = "0.5rem 0";
   li.style.color = "#fff";
 
-  li.appendChild(itemText);
-  li.appendChild(editBtn);
-  li.appendChild(deleteBtn);
-  itemAdd.appendChild(li);
-  inputValue.value = "";
-
   editBtn.addEventListener("click", () => {
     inputValue.value = text;
-    li.remove();
+    todos.splice(index, 1);
+    saveTodos();
+    renderTodos();
   });
 
   deleteBtn.addEventListener("click", () => {
-    inputValue.value = text;
-    li.remove();
+    todos.splice(index, 1);
+    saveTodos();
+    renderTodos();
   });
+
+  li.appendChild(itemText);
+  li.appendChild(editBtn);
+  li.appendChild(deleteBtn);
+
+  return li;
+};
+
+const renderTodos = () => {
+  itemAdd.innerHTML = "";
+  todos.forEach((todo, index) => {
+    itemAdd.appendChild(createTodoElement(todo, index));
+  });
+};
+
+addBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  const text = inputValue.value.trim();
+  if (!text) return;
+
+  todos.push(text);
+  saveTodos();
+  renderTodos();
+  inputValue.value = "";
 });
+
+renderTodos();
